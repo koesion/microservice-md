@@ -1,6 +1,6 @@
 # MICROSERVICE.md Specification
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Stable
 **File extension / name:** `MICROSERVICE.md`, placed at the root of a microservice's repository.
 
@@ -58,6 +58,7 @@ A MICROSERVICE.md file is, top to bottom:
 **Bounded Context:** ...                  (optional metadata block)
 **Team:** ... · <contact>
 **On-call:** ...
+**Catalog ID:** ...
 ---
 ## Responsibilities
 ## Interfaces
@@ -118,6 +119,7 @@ entirely if none of their subsections have content.
 **Bounded Context:** Order Management
 **Team:** Commerce Platform · #commerce-platform (Slack)
 **On-call:** PagerDuty: commerce-platform-oncall
+**Catalog ID:** 3f6c1b2e-8d4a-4c71-b0e2-5a7d9c3e9a1d
 
 ---
 ```
@@ -129,9 +131,32 @@ entirely if none of their subsections have content.
 | `**Bounded Context:**` | MAY | The service's DDD bounded context. |
 | `**Team:**` | MAY | Owning team, optionally followed by `· <contact>` (Slack channel, email, etc.). |
 | `**On-call:**` | MAY | On-call routing (e.g. a PagerDuty schedule name). |
+| `**Catalog ID:**` | MAY | The service's identifier in a service catalog. See §5.1. |
 
 Metadata lines are written with a trailing double-space (a Markdown hard
 line break) so they render as consecutive lines within one paragraph.
+
+### 5.1 `**Catalog ID:**`
+
+Links the file to the service's record in a service catalog (for example
+[microservice.md](https://microservice.md)), so that a tool or an AI coding
+agent working in the repository can find the catalog record without being
+told which one it is.
+
+- The value is a single token with no whitespace: the identifier the
+  catalog assigned to the service. It is opaque, so tools MUST NOT infer
+  meaning from its format. microservice.md writes the service's UUID.
+- The line appears at most once, in the metadata block. Tools that write
+  it SHOULD place it last in that block, after `**On-call:**`.
+- An empty `**Catalog ID:**` line means the file is not linked yet. A
+  catalog MAY fill in the value.
+- The Catalog ID records where the file is registered, not anything about
+  the service's design. Tools MUST NOT treat it as service data. A catalog
+  that generates the file from structured data adds the line on output.
+- A reader that finds no Catalog ID, or one that names a service it can't
+  access, SHOULD fall back to finding the service another way (for example
+  by name) or report the problem. It MUST NOT silently link to a different
+  service.
 
 ## 6. Sections reference
 

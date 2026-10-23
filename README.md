@@ -2,7 +2,7 @@
 
 **A lightweight, AI-ready documentation standard for microservices.**
 
-[![Spec Version](https://img.shields.io/badge/spec-1.0.0-blue)](SPEC.md)
+[![Spec Version](https://img.shields.io/badge/spec-1.1.0-blue)](SPEC.md)
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-green)](LICENSE)
 
 MICROSERVICE.md is a single Markdown file — `MICROSERVICE.md`, checked into
@@ -58,7 +58,7 @@ enumerated value — is in **[SPEC.md](SPEC.md)**.
 
 ## Status
 
-**v1.0.0.** The format is stable. Changes are tracked in
+**v1.1.0.** The format is stable. Changes are tracked in
 [CHANGELOG.md](CHANGELOG.md) and follow semantic versioning: new optional
 sections are minor-version additions; anything that would break parsing of
 an existing valid document is a major version.

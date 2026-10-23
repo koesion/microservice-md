@@ -5,6 +5,13 @@ this file. This project follows [Semantic Versioning](https://semver.org/):
 a new optional section or field is a **minor** release; a change that would
 break parsing of an existing, valid document is a **major** release.
 
+## [1.1.0] - 2026-10-22
+
+- New optional `**Catalog ID:**` metadata line (§5.1). It links a
+  MICROSERVICE.md to the service's record in a service catalog, so tools
+  and AI coding agents in the repository can find that record. Documents
+  without it are unchanged.
+
 ## [1.0.0] - 2026-08-10
 
 Initial public release of the specification.
