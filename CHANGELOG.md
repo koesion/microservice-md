@@ -5,6 +5,15 @@ this file. This project follows [Semantic Versioning](https://semver.org/):
 a new optional section or field is a **minor** release; a change that would
 break parsing of an existing, valid document is a **major** release.
 
+## [1.3.0] - 2026-11-08
+
+- New deployment platform values: `aws-ecs`, `aws-lambda`,
+  `google-cloud-run`, `azure-container-apps`, `fly`, `render`, `netlify`,
+  `docker-compose`.
+- New secret store labels: `AWS Parameter Store`, `Akeyless`,
+  `Sealed Secrets`, `SOPS`, `Platform env vars`. All existing values are
+  unchanged, so existing documents stay valid.
+
 ## [1.2.0] - 2026-11-08
 
 - New optional `**Service type:**` metadata line (§5.2). It says whether the

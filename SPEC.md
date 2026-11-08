@@ -1,6 +1,6 @@
 # MICROSERVICE.md Specification
 
-**Version:** 1.2.0
+**Version:** 1.3.0
 **Status:** Stable
 **File extension / name:** `MICROSERVICE.md`, placed at the root of a microservice's repository.
 
@@ -304,20 +304,25 @@ Secret store labels (value written → meaning):
 |---|---|
 | `HashiCorp Vault` | `hashicorp-vault` |
 | `AWS Secrets Manager` | `aws-secrets-manager` |
+| `AWS Parameter Store` | `aws-parameter-store` |
 | `Azure Key Vault` | `azure-key-vault` |
 | `GCP Secret Manager` | `gcp-secret-manager` |
 | `Doppler` | `doppler` |
 | `1Password` | `1password` |
 | `Infisical` | `infisical` |
+| `Akeyless` | `akeyless` |
 | `CyberArk Conjur` | `cyberark-conjur` |
 | `Kubernetes Secrets` | `kubernetes-secrets` |
+| `Sealed Secrets` | `sealed-secrets` |
+| `SOPS` | `sops` |
 | `Bitwarden Secrets` | `bitwarden-secrets` |
+| `Platform env vars` | `platform-env-vars` |
 | `Other` | `other` |
 
 #### `### Deployment`
 
-A bullet list of `**Label:** value` lines: `**Platform:**` (one of
-`kubernetes`, `helm`, `railway`, `northflank`, `vercel`, `other`),
+A bullet list of `**Label:** value` lines: `**Platform:**` (one of the
+deployment platform values in [§7](#7-enumerated-values-reference)),
 `**Replicas:**` (integer), `**CPU:**`, `**Memory:**`, `**Env Vars:**`
 (comma-separated names — never values).
 
@@ -467,8 +472,8 @@ tools MUST NOT parse it for service data.
 | Dependency criticality | `hard`, `soft` |
 | Dependency type | `internal`, `cloud` |
 | Resilience pattern | `retry`, `circuit-breaker`, `timeout`, `bulkhead`, `fallback`, `rate-limit`, `cache` |
-| Deployment platform | `kubernetes`, `helm`, `railway`, `northflank`, `vercel`, `other` |
-| Secret store | `hashicorp-vault`, `aws-secrets-manager`, `azure-key-vault`, `gcp-secret-manager`, `doppler`, `1password`, `infisical`, `cyberark-conjur`, `kubernetes-secrets`, `bitwarden-secrets`, `other` |
+| Deployment platform | `kubernetes`, `helm`, `aws-ecs`, `aws-lambda`, `google-cloud-run`, `azure-container-apps`, `fly`, `railway`, `render`, `northflank`, `vercel`, `netlify`, `docker-compose`, `other` |
+| Secret store | `hashicorp-vault`, `aws-secrets-manager`, `aws-parameter-store`, `azure-key-vault`, `gcp-secret-manager`, `doppler`, `1password`, `infisical`, `akeyless`, `cyberark-conjur`, `kubernetes-secrets`, `sealed-secrets`, `sops`, `bitwarden-secrets`, `platform-env-vars`, `other` |
 | BFF channel | `web`, `mobile`, `partner-api`, `admin-console`, `other` |
 | CQRS role | `writer`, `reader`, `both` |
 | Saga type | `orchestration`, `choreography` |
