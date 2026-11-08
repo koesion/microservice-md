@@ -1,6 +1,6 @@
 # MICROSERVICE.md Specification
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 **Status:** Stable
 **File extension / name:** `MICROSERVICE.md`, placed at the root of a microservice's repository.
 
@@ -56,6 +56,7 @@ A MICROSERVICE.md file is, top to bottom:
 # <Service Name>
 > <Mission statement>                     (optional)
 **Bounded Context:** ...                  (optional metadata block)
+**Service type:** ...
 **Team:** ... · <contact>
 **On-call:** ...
 **Catalog ID:** ...
@@ -129,6 +130,7 @@ entirely if none of their subsections have content.
 | `# <name>` | **MUST** | Exactly one H1, the service name. First line of the file. |
 | `> <mission>` | MAY | A single blockquote line stating the service's purpose in one sentence. |
 | `**Bounded Context:**` | MAY | The service's DDD bounded context. |
+| `**Service type:**` | MAY | `Domain service` or `BFF`, optionally with the channels a BFF serves. See §5.2. |
 | `**Team:**` | MAY | Owning team, optionally followed by `· <contact>` (Slack channel, email, etc.). |
 | `**On-call:**` | MAY | On-call routing (e.g. a PagerDuty schedule name). |
 | `**Catalog ID:**` | MAY | The service's identifier in a service catalog. See §5.1. |
@@ -157,6 +159,36 @@ told which one it is.
   access, SHOULD fall back to finding the service another way (for example
   by name) or report the problem. It MUST NOT silently link to a different
   service.
+
+### 5.2 `**Service type:**`
+
+Says what kind of service the file describes: a domain service, which owns
+a slice of the business and its data, or a Backend for Frontend (BFF),
+which composes other services' data for one or more client channels and
+usually owns no data of its own.
+
+```markdown
+**Bounded Context:** Checkout
+**Service type:** BFF (web, mobile)
+```
+
+- The value is one of:
+  - `BFF (<channels>)`: a BFF serving the listed channels, comma-separated.
+  - `BFF`: a BFF with no channels listed.
+  - `Domain service`: a domain service.
+- The line is optional. A file without it describes a domain service, so
+  tools SHOULD omit the line for domain services rather than write
+  `Domain service`.
+- The line appears at most once, in the metadata block. Tools that write
+  it SHOULD place it directly after `**Bounded Context:**`.
+- Channels in the parentheses SHOULD be BFF channel values (§7). They are a
+  summary: each channel's details (framework, deployment, URL) live in the
+  `### Backend for Frontend (BFF)` table (§6.6). When the line and the
+  table disagree, the table wins.
+- Readers match the value case-insensitively by prefix: a value starting
+  with `BFF` means a BFF, and one starting with `Domain` means a domain
+  service. A tool that finds any other value SHOULD treat the service as a
+  domain service and MUST preserve the value as written.
 
 ## 6. Sections reference
 
@@ -354,6 +386,8 @@ A table with columns **Name | Host | Auth**.
 
 A table with columns **Channel | Framework | Deployment | URL**. `Channel`
 MUST be one of `web`, `mobile`, `partner-api`, `admin-console`, `other`.
+A service that is itself a BFF SHOULD also say so with a
+`**Service type:** BFF` line in its metadata block (§5.2).
 
 #### `### CQRS`
 

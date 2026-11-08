@@ -5,6 +5,14 @@ this file. This project follows [Semantic Versioning](https://semver.org/):
 a new optional section or field is a **minor** release; a change that would
 break parsing of an existing, valid document is a **major** release.
 
+## [1.2.0] - 2026-11-08
+
+- New optional `**Service type:**` metadata line (§5.2). It says whether the
+  file describes a domain service or a Backend for Frontend (BFF), and for
+  a BFF which client channels it serves, for example
+  `**Service type:** BFF (web, mobile)`. A file without the line describes a
+  domain service, so existing documents are unchanged.
+
 ## [1.1.0] - 2026-10-22
 
 - New optional `**Catalog ID:**` metadata line (§5.1). It links a
