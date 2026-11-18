@@ -69,6 +69,37 @@ an existing valid document is a major version.
 generates, edits, and keeps a `MICROSERVICE.md` in sync with structured
 service data using exactly this grammar.
 
+## Use it with your coding agent
+
+A coding agent can read the `MICROSERVICE.md` in the repo it's working in.
+It can't see the services around it: who consumes the event it's about to
+rename, or what another service's API looks like. The Microservice.MD MCP
+server answers those questions from your catalog. It works with Claude Code,
+Cursor, and any other MCP client.
+
+```sh
+claude mcp add --transport http microservice-md https://mcp.microservice.md/mcp
+```
+
+The first call opens a browser window to sign in. CI pipelines use an API key
+instead. The server is read-only and only sees your own catalog. Its tools
+let an agent:
+
+- list your services and read a service's `MICROSERVICE.md`
+- get a service's generated contracts (OpenAPI, AsyncAPI, and more), or a
+  dependency's contracts before writing code against it
+- find who consumes an event, or which services depend on a service, before
+  changing it
+
+To link a repo to its catalog entry, add the optional `**Catalog ID:**`
+metadata line ([§5.1](SPEC.md#51-catalog-id)) to the repo's `MICROSERVICE.md`. The agent
+then reads the right service without asking.
+
+Setup for Cursor and CI, and an example prompt for each tool, are in the
+[MCP docs](https://microservice.md/docs/mcp). The server is listed in the
+[official MCP registry](https://registry.modelcontextprotocol.io/?q=md.microservice)
+as `md.microservice/catalog`.
+
 ## Contributing
 
 Issues and PRs proposing new optional sections, clarifications, or
